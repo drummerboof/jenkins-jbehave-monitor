@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Jenkins JBehave{% endblock %}</title>
+
+    {% block head %}
+    <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    {% endblock %}
+</head>
+<body>
+
+    {% block content %}{% endblock %}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/vendor/jquery.js"></script>
+    <script src="/javascripts/vendor/underscore.js"></script>
+    <script src="/javascripts/vendor/backbone.js"></script>
+    <script src="/javascripts/vendor/handlebars-runtime.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

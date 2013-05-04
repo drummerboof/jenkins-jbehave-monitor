@@ -1,0 +1,17 @@
+{
+    "name": "jenkins-jbehave-analyzer",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "prestart": "handlebars public/javascripts/app/views/templates/ -f public/javascripts/app/views/templates.js",
+        "start": "node app"
+    },
+    "dependencies": {
+        "express": "3.2.0",
+        "request": "2.x",
+        "socket.io": "0.9.x",
+        "consolidate": "0.8.x",
+        "handlebars": "1.0.x",
+        "swig": "0.8.x"
+    }
+}
