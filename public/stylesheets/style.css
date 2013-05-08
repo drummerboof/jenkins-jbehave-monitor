@@ -1,8 +1,22 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
-  color: #00B7FF;
+
+}
+
+#FailedTests th {
+    cursor: pointer;
+}
+
+#FailedTests th.asc,
+#FailedTests th.desc {
+    color: #0088cc;
+}
+
+#Graph {
+    height: 350px;
+    width: 100%;
+    margin-bottom: 30px;
 }

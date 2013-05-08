@@ -6,6 +6,8 @@
 
     {% block head %}
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="/javascripts/vendor/backbone-forms/distribution/templates/bootstrap.css" rel="stylesheet" />
     {% endblock %}
 </head>
 <body>
@@ -13,10 +15,13 @@
     {% block content %}{% endblock %}
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascripts/vendor/jquery.js"></script>
-    <script src="/javascripts/vendor/underscore.js"></script>
-    <script src="/javascripts/vendor/backbone.js"></script>
-    <script src="/javascripts/vendor/handlebars-runtime.js"></script>
+    <script src="/javascripts/vendor/jquery/jquery.js"></script>
+    <script src="/javascripts/vendor/underscore/underscore.js"></script>
+    <script src="/javascripts/vendor/backbone/backbone.js"></script>
+    <script src="/javascripts/vendor/backbone-forms/distribution/backbone-forms.js"></script>
+    <script src="/javascripts/vendor/handlebars/dist/handlebars.runtime.js"></script>
+    <script src="/javascripts/vendor/highcharts/highcharts.js"></script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

@@ -2,14 +2,37 @@
 
 {% block content %}
 
-<h2>Stuff in here</h2>
+<div id="App" class="container">
+    <div class="page-header">
+        <h1>JBehave Monitor <small id="LastUpdated"></small></h1>
+    </div>
+    <div id="Graph">
+
+    </div>
+    <div id="Tests">
+
+    </div>
+</div>
 
 {% endblock %}
 
 {% block scripts %}
 
-<script src="/javascripts/init.js"></script>
+<script src="/javascripts/app/init.js"></script>
 
-<script src="/javascripts/src/app/views/templates.js"></script>
+<script src="/javascripts/app/views/App.view.js"></script>
+<script src="/javascripts/app/views/Tests.view.js"></script>
+<script src="/javascripts/app/views/Test.view.js"></script>
+<script src="/javascripts/app/views/FailuresGraph.view.js"></script>
+<script src="/javascripts/lib/form.template.js"></script>
+
+<script src="/javascripts/app/collections/Builds.collection.js"></script>
+<script src="/javascripts/app/collections/Tests.collection.js"></script>
+
+<script src="/javascripts/app/models/Settings.model.js"></script>
+<script src="/javascripts/app/models/Test.model.js"></script>
+<script src="/javascripts/app/models/Build.model.js"></script>
+
+<script src="/javascripts/app/views/templates.js"></script>
 
 {% endblock %}

@@ -1,0 +1,10 @@
+<td class="test-name">{{ name }}</td>
+<td class="test-recent">
+    {{ mostRecent }}
+    {{#if failedOnLastBuild}}
+        <span class="label label-important">Last Build</span>
+    {{/if}}
+</td>
+<td class="test-count">{{ count }}</td>
+<td class="test-rate">{{ rate }}%</td>
+<td class="test-score">{{ score }}</td>

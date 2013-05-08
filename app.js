@@ -3,14 +3,22 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-    http = require('http'),
+var http = require('http'),
+    express = require('express'),
     consolidate = require('consolidate'),
     swig = require('swig'),
     path = require('path'),
-    socketio = require('socket.io');
+    socketio = require('socket.io'),
+    JenkinsClient = require('./lib/jenkins-api/Jenkins'),
+    JBehaveParser = require('./lib/jenkins-api/parsers/jbehave');
 
-var app = express();
+var app = express(),
+    server = http.createServer(app),
+    io = socketio.listen(server, { log: false }),
+    jenkins = new JenkinsClient({
+        hudsonUrl: 'http://hudson-dsa.cg.bskyb.com',
+        logParsers: [JBehaveParser]
+    });
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
@@ -30,10 +38,37 @@ app.configure('development', function(){
     app.use(express.errorHandler());
 });
 
-app.get('/', function (req, res) {
+app.get('/:build', function (req, res) {
     res.render('index');
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+server.listen(app.get('port'), function(){
+    console.log('Express server listening on port ' + app.get('port'));
 });
+
+io.sockets.on('connection', function (socket) {
+    socket.on('builds', function (data) {
+        jenkins.getJob(data.job, function (error, job) {
+            if (!error && job.lastFailedBuild.number > data.since) {
+                getBuildsRecursive(jenkins, data.job, data.since, job.lastFailedBuild.number, function (build) {
+                    socket.emit('build', build);
+                });
+            }
+        });
+    });
+});
+
+function getBuildsRecursive (jenkins, job, from, to, callback) {
+    console.log('Fetching build: ', to, ' from: ', from);
+    jenkins.getBuild(job, to, function (error, build) {
+        if (!error) {
+            if (build.result === 'FAILURE') {
+                callback(build);
+            }
+            to = to - 1;
+            if (to > from) {
+                getBuildsRecursive(jenkins, job, from, to, callback);
+            }
+        }
+    });
+}

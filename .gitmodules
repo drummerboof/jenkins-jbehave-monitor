@@ -1,0 +1,12 @@
+[submodule "public/javascripts/vendor/backbone-forms"]
+	path = public/javascripts/vendor/backbone-forms
+	url = https://github.com/powmedia/backbone-forms.git
+[submodule "public/javascripts/vendor/backbone"]
+	path = public/javascripts/vendor/backbone
+	url = https://github.com/documentcloud/backbone.git
+[submodule "public/javascripts/vendor/underscore"]
+	path = public/javascripts/vendor/underscore
+	url = https://github.com/documentcloud/underscore.git
+[submodule "public/javascripts/vendor/handlebars"]
+	path = public/javascripts/vendor/handlebars
+	url = https://github.com/wycats/handlebars.js.git
