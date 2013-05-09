@@ -1,0 +1,13 @@
+<h2>
+    {{count}} New Failures
+    <small>Failed in build {{latest}} and not the previous build</small>
+</h2>
+<table class="table table-bordered table-hover table-striped">
+    <tbody>
+        {{#each failures}}
+            <tr>
+                <td>{{this}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

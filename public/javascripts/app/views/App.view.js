@@ -4,6 +4,10 @@ JJBA.Views.App = (function () {
 
         el: '#App',
 
+        events: {
+            'click #Refresh': 'refresh'
+        },
+
         views: {},
 
         models: {},
@@ -29,11 +33,23 @@ JJBA.Views.App = (function () {
             this.views.graph = new JJBA.Views.FailuresGraph({
                 model: this.collections.builds
             });
+            this.views.recent = new JJBA.Views.MostRecent({
+                model: this.collections.builds
+            });
+            this.views.summary = new JJBA.Views.Summary({
+                model: this.collections.builds
+            });
         },
 
         render: function () {
             this.views.graph.render();
+            this.views.recent.render();
             this.views.tests.render();
+            this.views.summary.render();
+        },
+
+        refresh: function () {
+            this.collections.builds.poll();
         }
 
     });

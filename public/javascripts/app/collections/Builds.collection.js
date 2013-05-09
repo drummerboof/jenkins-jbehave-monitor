@@ -23,13 +23,13 @@ JJBA.Collections.Builds = (function () {
 
         },
 
-        _requestBuilds: function () {
+        poll: function () {
             console.log('Requesting builds...');
             this.socket.emit('builds', {
                 job: this.job,
                 since: this.latestBuild
             });
-            setTimeout(_.bind(this._requestBuilds, this), this._requestTimeout * 1000);
+            setTimeout(_.bind(this.poll, this), this._requestTimeout * 1000);
             this.trigger('requested');
         },
 
@@ -41,7 +41,7 @@ JJBA.Collections.Builds = (function () {
 
         _onSocketConnect: function () {
             console.log('Socket connected...');
-            this._requestBuilds();
+            this.poll();
         },
 
         _onSocketDisconnect: function () {
@@ -62,6 +62,9 @@ JJBA.Collections.Builds = (function () {
                     this.tests.add(test, { merge: true });
                 }, this);
             }
+            this.tests.each(function (test) {
+                test.set({ latestBuild: this.latestBuild });
+            }, this);
         }
 
     });

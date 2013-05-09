@@ -8,7 +8,9 @@ JJBA.Collections.Tests = (function () {
         },
 
         initialize: function (models, options) {
-            this.on('change', function () { this.sort(); }, this);
+            this.on('change', function (model) {
+                this.sort();
+            }, this);
         },
 
         comparator: function (model1, model2) {

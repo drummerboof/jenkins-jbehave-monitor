@@ -20,15 +20,16 @@ JJBA.Models.Test = (function () {
 
         initialize: function (attributes, options) {
             this.builds = options.builds;
-            this.on('change:builds', this._onBuildsChange, this);
+            this.on('change', this._onBuildsChange, this);
         },
 
         _onBuildsChange: function (model, value) {
+            var builds = this.get('builds');
             this.set({
-                mostRecent: _.max(value),
+                mostRecent: _.max(builds),
                 score: this._calculateScore().toFixed(3),
-                count: value.length,
-                rate: ((value.length / this.builds.length) * 100).toFixed(0)
+                count: builds.length,
+                rate: ((builds.length / this.builds.length) * 100).toFixed(0)
             });
         },
 
