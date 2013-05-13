@@ -20,7 +20,8 @@ JJBA.Models.Test = (function () {
 
         initialize: function (attributes, options) {
             this.builds = options.builds;
-            this.on('change', this._onBuildsChange, this);
+            this.on('change:builds', this._onBuildsChange, this);
+            this.on('change:latestBuild', this._onBuildsChange, this);
         },
 
         _onBuildsChange: function (model, value) {
@@ -29,14 +30,15 @@ JJBA.Models.Test = (function () {
                 mostRecent: _.max(builds),
                 score: this._calculateScore().toFixed(3),
                 count: builds.length,
-                rate: ((builds.length / this.builds.length) * 100).toFixed(0)
+                rate: ((builds.length / this.builds.length) * 100).toFixed(0),
+                failedOnLastBuild: this.get('latestBuild') === this.get('mostRecent')
             });
         },
 
         _calculateScore: function () {
             var score = 0;
             _.each(this.get('builds'), function (build) {
-                score += this._scoreMultiply(this.builds.latestBuild - build);
+                score += this._scoreMultiply(this.builds.latest() - build);
             }, this);
             return score;
         },

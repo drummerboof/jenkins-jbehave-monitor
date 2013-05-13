@@ -10,9 +10,7 @@ JJBA.Views.Test = (function () {
         },
 
         render: function () {
-            this.$el.html(this.template(_.extend({
-                failedOnLastBuild: this.model.get('latestBuild') === this.model.get('mostRecent')
-            }, this.model.toJSON())));
+            this.$el.html(this.template(this.model.toJSON()));
             this.$el.addClass('test-row');
             return this;
         }

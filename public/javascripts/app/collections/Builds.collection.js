@@ -4,8 +4,6 @@ JJBA.Collections.Builds = (function () {
 
         comparator: 'number',
 
-        latestBuild: 0,
-
         _buildLimit: 50,
 
         _requestTimeout: 300,
@@ -27,15 +25,21 @@ JJBA.Collections.Builds = (function () {
             console.log('Requesting builds...');
             this.socket.emit('builds', {
                 job: this.job,
-                since: this.latestBuild
+                since: this.latest()
             });
             setTimeout(_.bind(this.poll, this), this._requestTimeout * 1000);
             this.trigger('requested');
         },
 
+        latest: function () {
+             var max = this.max(function (build) {
+                 return build.get('number');
+             })
+             return max.get ? max.get('number') : 0;
+        },
+
         _onSocketReceive: function (build) {
             console.log('Build received: ', build.number);
-            this.latestBuild = Math.max(build.number, this.latestBuild);
             this.add(build);
         },
 
@@ -63,7 +67,7 @@ JJBA.Collections.Builds = (function () {
                 }, this);
             }
             this.tests.each(function (test) {
-                test.set({ latestBuild: this.latestBuild });
+                test.set({ latestBuild: this.latest() });
             }, this);
         }
 
