@@ -15,6 +15,14 @@ a {
     color: #0088cc;
 }
 
+#FailedTests tr {
+    cursor: pointer;
+}
+
+#FailedTests tr.test-row.details {
+    font-weight: bold;
+}
+
 #Graph {
     height: 350px;
     width: 100%;

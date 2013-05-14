@@ -61,7 +61,7 @@ io.sockets.on('connection', function (socket) {
 function getBuildsRecursive (jenkins, job, from, to, callback) {
     console.log('Fetching build: ', to, ' from: ', from);
     jenkins.getBuild(job, to, function (error, build) {
-        if (build.result === 'FAILURE') {
+        if (build.result === 'FAILURE' && build.failedJBehaves.length > 0) {
             callback(build);
         }
         to = to - 1;
