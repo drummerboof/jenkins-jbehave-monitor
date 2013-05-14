@@ -31,7 +31,7 @@ JJBA.Models.Test = (function () {
                 score: this._calculateScore().toFixed(3),
                 count: builds.length,
                 rate: ((builds.length / this.builds.length) * 100).toFixed(0),
-                failedOnLastBuild: this.get('latestBuild') === this.get('mostRecent')
+                failedOnLastBuild: this.get('latestBuild') === _.max(builds)
             });
         },
 
