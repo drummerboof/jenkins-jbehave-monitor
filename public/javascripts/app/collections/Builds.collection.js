@@ -55,14 +55,21 @@ JJBA.Collections.Builds = (function () {
         _onBuildAdd: function (build) {
             if (build.get('failedJBehaves') && build.get('failedJBehaves').length > 0) {
                 _.each(build.get('failedJBehaves'), function (testData) {
+                    var node = testData.node;
+                    delete testData.node;
                     var test = this.tests.get(testData.name) || new JJBA.Models.Test(testData, {
                             builds: this
                         }),
                         builds = test.get('builds').concat();
-                    builds.push(build.get('number'));
+
+                    builds.push( {
+                        number : build.get('number'),
+                        node: node
+                    });
                     test.set({
                         builds: builds
                     });
+
                     this.tests.add(test, { merge: true });
                 }, this);
             }

@@ -1,4 +1,9 @@
-<td class="test-name">{{ name }}</td>
+<td class="test-name">
+    {{ name }}
+    {{#if failedOnLastBuild}}
+        [<a href="{{ mostRecentNode }}">{{ mostRecentNode }}</a>]
+    {{/if}}
+</td>
 <td class="test-recent">
     {{ mostRecent }}
     {{#if failedOnLastBuild}}

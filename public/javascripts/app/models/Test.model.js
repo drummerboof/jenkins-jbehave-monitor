@@ -24,21 +24,31 @@ JJBA.Models.Test = (function () {
             this.on('change:latestBuild', this._onBuildsChange, this);
         },
 
+        lastFailedBuild: function () {
+            return _.max(this.get('builds'), function (build) {
+                return build.number;
+            });
+        },
+
         _onBuildsChange: function (model, value) {
-            var builds = this.get('builds');
+            var builds = this.get('builds'),
+                lastFailedBuild = this.lastFailedBuild(),
+                failedOnLastBuild = this.get('latestBuild') === lastFailedBuild.number;
+
             this.set({
-                mostRecent: _.max(builds),
+                mostRecent: lastFailedBuild.number,
                 score: this._calculateScore().toFixed(3),
                 count: builds.length,
                 rate: ((builds.length / this.builds.length) * 100).toFixed(0),
-                failedOnLastBuild: this.get('latestBuild') === _.max(builds)
+                failedOnLastBuild: failedOnLastBuild,
+                mostRecentNode: lastFailedBuild.node
             });
         },
 
         _calculateScore: function () {
             var score = 0;
             _.each(this.get('builds'), function (build) {
-                score += this._scoreMultiply(this.builds.latest() - build);
+                score += this._scoreMultiply(this.builds.latest() - build.number);
             }, this);
             return score;
         },

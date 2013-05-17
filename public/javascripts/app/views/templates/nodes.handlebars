@@ -1,0 +1,25 @@
+<h2>
+    Selenium Grid Nodes
+</h2>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Node</th>
+            <th>Failures</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each hosts}}
+            <tr class="host">
+                <td>{{this.ip}}</td>
+                <td><span class="badge badge-inverse">{{this.total}}</span></td>
+            <tr>
+            {{#each this.children}}
+                <tr class="node">
+                    <td><a href="{{this.node}}">{{this.node}}</a> <span class="label label-info">{{this.tag}}</span></td>
+                    <td><span class="badge">{{this.failures}}</span></td>
+                </tr>
+            {{/each}}
+        {{/each}}
+    </tbody>
+</table>

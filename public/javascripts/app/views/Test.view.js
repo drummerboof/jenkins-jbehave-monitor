@@ -29,9 +29,7 @@ JJBA.Views.Test = (function () {
                 this.$el.removeClass('details');
             } else {
                 this.$el.after(
-                    $(this.popover(_.extend({
-                        buildsStr: this.model.get('builds').join(', ')
-                    }, this.model.toJSON())))
+                    $(this.popover(this.model.toJSON()))
                 );
                 this.$el.addClass('details');
             }

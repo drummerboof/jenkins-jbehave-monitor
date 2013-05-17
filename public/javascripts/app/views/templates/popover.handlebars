@@ -1,5 +1,12 @@
 <tr class="test-details">
     <td colspan="5">
-        Failed on builds: {{buildsStr}}
+        <ul>
+        {{#each builds}}
+            <li>Failed on build {{this.number}}
+             {{#if this.node}}
+                on node <a href="{{this.node}}">{{this.node}}</a></li>
+             {{/if}}
+        {{/each}}
+        </ul>
     </td>
 </tr>

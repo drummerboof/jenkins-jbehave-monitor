@@ -36,6 +36,9 @@ JJBA.Views.App = (function () {
             this.views.recent = new JJBA.Views.MostRecent({
                 model: this.collections.builds
             });
+            this.views.nodes = new JJBA.Views.Nodes({
+                model: this.collections.tests
+            });
             this.views.summary = new JJBA.Views.Summary({
                 model: this.collections.builds
             });
