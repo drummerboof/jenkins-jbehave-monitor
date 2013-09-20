@@ -3,10 +3,11 @@
     "version": "0.0.1",
     "private": true,
     "scripts": {
-        "prestart": "handlebars public/javascripts/app/views/templates/ -f public/javascripts/app/views/templates.js",
+        "prestart": "./node_modules/handlebars/bin/handlebars public/javascripts/app/views/templates/ -f public/javascripts/app/views/templates.js",
         "start": "node app"
     },
     "dependencies": {
+	"optimist": "*",
         "express": "3.2.0",
         "request": "2.x",
         "socket.io": "0.9.x",

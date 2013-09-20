@@ -7,6 +7,3 @@
 [submodule "public/javascripts/vendor/underscore"]
 	path = public/javascripts/vendor/underscore
 	url = https://github.com/documentcloud/underscore.git
-[submodule "public/javascripts/vendor/handlebars"]
-	path = public/javascripts/vendor/handlebars
-	url = https://github.com/wycats/handlebars.js.git
